@@ -1,7 +1,6 @@
-touch README.md
+echo "# $1" >> README.md
 git init
-git add .
-git commit -m "$1"
-git remote add origin git@github.com:gameeklab/$2.git
+git add README.md
+git commit -m "first commit"
+git remote set-url origin git@github.com:gameeklab/$1.git
 git push -u origin master
-
