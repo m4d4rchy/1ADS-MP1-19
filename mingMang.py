@@ -89,6 +89,7 @@ def possiblePawn(board, n , player, i, j):
 
 def possibleDestination(board, n , i, j, k, l):
 	if (k.isdigit() == False or l.isdigit() == False):
+		print("False")
 		return (False)
 	k = int(k) - 1
 	l = int(k) - 1
@@ -102,6 +103,7 @@ def possibleDestination(board, n , i, j, k, l):
 	elif (j == l):
 		while (p != k):
 			if (board[p][j] == 1 or [board[p][j]] == 2):
+				print("False")
 				return (False)
 			p = p + 1
 	else:
