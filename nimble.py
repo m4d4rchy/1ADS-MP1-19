@@ -1,7 +1,5 @@
 #!/usr/bin/python3.5
 import random
-import signal
-import sys
 
 def newBoard(n, p):
 	c = 0
@@ -44,13 +42,9 @@ def possibleSquare(board, n, i):
 def selectSquare(board, n):
 	err = 1
 	while (err == 1):
-		try:
-			i = input("Choose a square : ")
-			if (possibleSquare(board, n, i) == True):
-				err = 0
-		except KeyboardInterrupt:
-			print('\n')
-			exit()
+		i = input("Choose a square : ")
+		if (possibleSquare(board, n, i) == True):
+			err = 0
 	i = int(i)
 	return (i - 1)
 
@@ -66,13 +60,9 @@ def possibleDestination(board, n, i, j):
 def selectDestination(board, n, i):
 	err = 1
 	while (err == 1):
-		try:
-			j = input("Choose a destination : ")
-			if (possibleDestination(board, n, i, j) == True):
-				err = 0
-		except KeyboardInterrupt:
-			print('\n')
-			exit()	
+		j = input("Choose a destination : ")
+		if (possibleDestination(board, n, i, j) == True):
+			err = 0
 	j = int(j)
 	return (j - 1)
 
@@ -100,8 +90,12 @@ def nimble(n, p):
 	while (lose(board, n) == False):
 		display(board, n)
 		print("\n", "Player ", p, sep = '')
-		i = selectSquare(board, n)
-		j = selectDestination(board, n, i)
+		try:
+			i = selectSquare(board, n)
+			j = selectDestination(board, n, i)
+		except KeyboardInterrupt:
+			print('\n')
+			exit()	
 		print('\n')
 		board = move(board, n, i, j)
 		if (lose(board, n) == True):
