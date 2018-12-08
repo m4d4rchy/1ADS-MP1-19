@@ -1,10 +1,10 @@
+#!/usr/bin/python3.5
 #################################################
 # @Author: Yassine Benmessahel 			#
 # @Date: 2018-11-20 11:27:7 			#
 # @Last Modified by:   Yassine Benmessahel 	#
 # @Last Modified time: 2018-11-28 13:46:7 	#
 #################################################
-#!/usr/bin/python3.5
 import random
 
 def newBoard(n, p):

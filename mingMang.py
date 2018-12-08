@@ -1,10 +1,10 @@
+#!/usr/bin/python3.5
 #################################################
 # @Author: Yassine Benmessahel 			#
 # @Date: 2018-11-25 15:11:10 			#
 # @Last Modified by:   Yassine Benmessahel 	#
 # @Last Modified time: 2018-12-08 12:26:13 	#
 #################################################
-#!/usr/bin/python3.5
 
 def newBoard(n):
 	board = [[0] * n for i in range(n)]
@@ -270,4 +270,4 @@ def mingMang(n):
 		else:
 			player = player + 1	
 
-mingMang(4)
+mingMang(8)
