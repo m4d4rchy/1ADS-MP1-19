@@ -72,19 +72,37 @@ def display(board, n):
 			c = c + 1
 	print('\n', end='')
 
-def possiblePawn(board, n , player, i, j):
+def possiblePawn(board, n, player, i ,j):
 	if (i.isdigit() == False or j.isdigit() == False):
 		return (False)
 	i = int(i) - 1
 	j = int(j) - 1
-	if (board[i][j] == player and i == 0 and (board[i][j + 1] == 0 or board[i + 1][j] == 0)):
-		return (True)
-	elif (board[i][j] == player and (i == n - 1 or j == n - 1) and (board[i][j - 1] == 0 or board[i - 1][j] == 0)):
-		return (True)
-	elif (board[i][j] == player and (board[i][j + 1] == 0 or board[i][j - 1] == 0 or board[i + 1][j] == 0 or board[i- 1][j] == 0)):
-		return (True)
-	else:
-		return (False)
+	if (board[i][j] == player):
+		if (j == 0):
+			if ((i > 0 and i < (n - 1)) and (board[i][j + 1] == 0 or board[i + 1][j] == 0 or board[i - 1][j] == 0)):
+				return (True)
+			elif (i == 0 and (board[i][j + 1] == 0 or board[i + 1] == 0)):
+				return (True)
+			elif ((i == (n - 1)) and (board[i][j + 1] == 0 or board[i - 1][j] == 0)):
+				return (True)
+		elif (j == (n - 1)):
+			if ((i > 0 and i < (n - 1)) and (board[i][j - 1] == 0 or board[i + 1][j] == 0 or board[i - 1][j] == 0)):
+				return (True)
+			elif (i == 0 and (board[i][j - 1] == 0 or board[i + 1][j] == 0)):
+				return (True)
+			elif ((i == (n - 1)) and (board[i][j - 1] == 0 or board[i - 1][j] == 0)):
+				return (True)
+		elif (i == 0 and (j > 0 and j < n - 1)):
+			if (board[i + 1][j] == 0 or board[i][j + 1] == 0 or board[i][j - 1] == 0):
+				return (True)
+		elif (i == (n - 1) and (j > 0 and j < n - 1)):
+			if (board[i - 1][j] == 0 or board[i - 1][j] ==  0 or board[i][j + 1] == 0 or board[i][j - 1] == 0):
+				return (True)
+		elif ((i > 0 and i < n - 1) and (j > 0 and j < n - 1)):
+			if (board[i + 1][j] == 0 or board[i - 1][j] == 0 or board[i][j + 1] == 0 or board[i][j - 1] == 0):
+				return (True)
+
+	return (False)
 
 def possibleDestination(board, n , i, j, k, l):
 	if (k.isdigit() == False or l.isdigit() == False):
@@ -190,31 +208,40 @@ def lose(board, n, player):
 	col = 0
 	if (pawnLeft(board, n, player) == False):
 		return (False)
-	#while (row != n):
-		#if (possiblePawn == False):
+	else:
+		return (True)
 
 
 
 def pawnLeft(board, n, player):
-	row = 0
-	col = 0
+	row = '1'
+	col = '1'
 	p1 = 0
 	p2 = 0
-	while (row != n):
-		if (board[row][col] == 1):
-			p1 = p1 + 1
-		if (board[row][col] == 2):
+	b1 = 0
+	b2 = 0
+	while (int(row) - 1 != n):
+		if (board[int(row) - 1][int(col) - 1] == 1):
+			if (possiblePawn(board, n, player, row, col) == False):
+				b1 = b1 + 1
+		elif (board[int(row) - 1][int(col) - 1] == 2):
+			if (possiblePawn(board, n, player, row, col) == False):
+				b2 = b2 + 1
 			p2 = p2 + 1
-		while (col != n):
-			if (board[row][col] == 1):
+		while (int(col) - 1 != n):
+			if (board[int(row) - 1][int(col) - 1] == 1):
+				if (possiblePawn(board, n, player, row, col) == False):
+					b1 = b1 + 1
 				p1 = p1 + 2
-			if (board[row][col] == 2):
+			elif (board[int(row) - 1][int(col) - 1] == 2):
+				if (possiblePawn(board, n, player, row, col) == False):
+					b2 = b2 + 1
 				p2 = p2 + 2
-			col = col + 1
-		if (col == n):
-			col = 0
-		row = row + 1
-	if (p1 == 0 or p2 == 0):
+			col = chr(ord(col) + 1)
+		if (int(col) - 1 == n):
+			col = '1'
+		row = chr(ord(row) + 1)
+	if (p1 == 0 or p2 == 0 or b1 == p1 or b2 == p2):
 		return (True)
 	else:
 		return (False)
